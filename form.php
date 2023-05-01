@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Задание 5</title>
+    <title>Форма и аккаунты</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <style>
 .error {
-  border: 2px solid red;
+  border: 2px solid #aa0000; 
+background: #F8E4DF; 
+padding: 15px; 
+border-radius: 9px; 
+font-size: 12px;
 }
 .error_text {
   margin: 4px;
@@ -24,76 +28,95 @@
       <main>
         <div>
                 <form action="" method="POST">
-                <label>
-                  Имя<br />
-                  <input name="fio" <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>"/>
+                  
+                <label>Введите Ваше имя: <br />
+                  <input name="fio" 
+                         <?php if ($errors['fio']) {print 'class="error"';} ?> value="<?php print $values['fio']; ?>"/>
                 </label><br />
                 <?php if ($errors['fio']) {print $messages[0];} ?>
 
-                <label>
-                  E-mail:<br />
+                <label>Введите свою почту: <br />
                   <input name="email"
                   <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>"
                     type="email" />
                 </label><br />
                 <?php if ($errors['email']) {print $messages[1];} ?>
 
-                <label>
-                  Дата рождения:<br />
-                  <input name="birthday"
-                    <?php if ($errors['birthday']) {print 'class="error"';} ?> value="<?php print $values['birthday']; ?>"
-                    type="date" min="1900-01-01" max="2022-12-31">
-                </label><br />
-                <?php if ($errors['birthday']) {print $messages[2];} ?>
-                Гендер:<br />
-                <?php if ($errors['gender']) {print '<div class="error">';} ?>
+                <p>Укажите год своего рождения: <br>
+                  <select name="birthday" 
+                          <?php if ($errors['birthday']) {print 'class="error"';} ?>>
+                    <?php 
+                    for ($i = 1922; $i <= 2022; $i++) {
+                      printf('<option value="%d">%d год</option>', $i, $i);}
+                    ?><?php
+                    for ($i = 2023; $i >= 1922; $i--) {
+                      if ($i == $values['birthday']) {
+                        printf('<option selected value="%d">%d год</option>', $i, $i);
+                      } else {
+                        printf('<option value="%d">%d год</option>', $i, $i);
+                      }
+                    }?></select>
+                     
+                  Укажите Ваш пол:
+                <br />
+                <?php if ($errors['gender']) 
+{print '<div class="error">';} ?>
                 <label><input type="radio"
-                  name="gender" value="Male" <?php if($values['gender']=='Male') print "checked";else print ""; ?> />
+                  name="gender" value="Male" 
+                              <?php if($values['gender']=='Male') print "checked";else print ""; ?> />
                   мужской
                 </label>
                 <label><input type="radio"
-                  name="gender" value="Female" <?php echo ($values['gender']=='Female') ?  "checked" : "" ;  ?> />
+                  name="gender" value="Female" 
+                              <?php echo ($values['gender']=='Female') ?  "checked" : "" ;  ?> />
                   женский
                 </label>
                 <label><input type="radio"
-                  name="gender" value="Other" <?php echo ($values['gender']=='Other') ?  "checked" : "" ;  ?> />
+                  name="gender" value="Other"
+                              <?php echo ($values['gender']=='Other') ?  "checked" : "" ;  ?> />
                   другое
                 </label>
                 <br />
                 <?php if ($errors['gender']) {print '</div>';print $messages[3];} ?>
 
 
-                Количество конечностей:<br />
+                Сколько у Вас конечностей?<br />
                 <?php if ($errors['limbs']) {print '<div class="error">';} ?>
                 <label><input type="radio"
-                  name="limbs" value="0" <?php echo ($values['limbs']=='0') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="0" 
+                              <?php echo ($values['limbs']=='0') ?  "checked" : "" ;  ?>/>
                   0
                 </label>
                 <label><input type="radio"
-                  name="limbs" value="1" <?php echo ($values['limbs']=='1') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="1" 
+                              <?php echo ($values['limbs']=='1') ?  "checked" : "" ;  ?>/>
                   1
                 </label>
                 <label><input type="radio"
-                  name="limbs" value="2" <?php echo ($values['limbs']=='2') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="2" 
+                              <?php echo ($values['limbs']=='2') ?  "checked" : "" ;  ?>/>
                   2
                 </label>
                 <label><input type="radio"
-                  name="limbs" value="3" <?php echo ($values['limbs']=='3') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="3" 
+                              <?php echo ($values['limbs']=='3') ?  "checked" : "" ;  ?>/>
                   3
                 </label>
                 <label><input type="radio"
-                  name="limbs" value="4" <?php echo ($values['limbs']=='4') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="4" 
+                              <?php echo ($values['limbs']=='4') ?  "checked" : "" ;  ?>/>
                   4
                 </label>
                 <label><input type="radio"
-                  name="limbs" value="5+" <?php echo ($values['limbs']=='5+') ?  "checked" : "" ;  ?>/>
+                  name="limbs" value="5+" 
+                              <?php echo ($values['limbs']=='5+') ?  "checked" : "" ;  ?>/>
                   5+
                 </label>
                 <br />
                 <?php if ($errors['limbs']) {print '</div>';print $messages[4];} ?>
                 <?php echo (in_array("0",$ability)) ?  "selected" : ""  ; ?>
                 <label>
-                  Сверхспособности:
+                  Какую суперсилу вы хотите/имеете?
                   <br />
                   <select name="ability[]"
                     multiple="multiple" <?php if ($errors['ability']) {print 'class="error"';} ?>>
@@ -105,7 +128,7 @@
                 <?php if ($errors['ability']) {print $messages[5];} ?>
 
                 <label>
-                  Биография:<br />
+                  Расскажите немного о себе: <br />
                   <textarea name="biography" <?php if ($errors['biography']) {print 'class="error"';} ?>><?php echo $values['biography'] ;  ?></textarea>
                 </label><br />
                 <?php if ($errors['biography']) {print $messages[6];} ?>
@@ -131,5 +154,4 @@ printf($messages[10], $_SESSION['login'], $_SESSION['uid']);
 }
 ?>
   </body>
-
 </html>
