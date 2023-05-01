@@ -207,7 +207,7 @@ if(!isset($check)){
     setcookie('bio_error', '', 100000);
     setcookie('check_error', '', 100000);
   }
-  if (!empty($_COOKIE[session_name()]) && !empty($_SESSION['login'])) {¶
+  if (!empty($_COOKIE[session_name()]) && !empty($_SESSION['login'])) {
   $user = 'u52806';
   $pass = '7974759';
   $db = new PDO('mysql:host=localhost;dbname=u52806', $user, $pass, [PDO::ATTR_PERSISTENT => true]);
